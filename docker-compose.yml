@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "8000"
+    networks:
+      - backend
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx/campusride.conf:/etc/nginx/conf.d/campusride.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - web
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
