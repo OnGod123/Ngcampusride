@@ -1,7 +1,12 @@
-from pay_wall import  pay_wall_server
-from pay_wall import pay_verification  
-from pay_wall import settings
-from pay_wall import pay_walldb  
+from settings import app, db  # Assuming these are in settings.py
+
+# Other necessary imports
+from flask import Flask
+
+# If you have models or routes in other modules, import them as well
+from pay_wall.pay_verification import response  # Example of importing a function
+from pay_wall.pay_wall_server import initialize_payment  # Example of importing a route
+
 
 
 

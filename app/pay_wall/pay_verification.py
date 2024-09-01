@@ -1,7 +1,6 @@
-from . import pay_wall_server
-from . import pay_walldb
-import requests
 import os
+import requests
+from settings import app, db
 
 PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY', 'sk_test_13b0d842352136d91e09139441abed6d951ab516')
 def response(reference):
