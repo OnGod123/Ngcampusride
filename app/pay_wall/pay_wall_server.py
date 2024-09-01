@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
 import requests
-from app.home import app
-app = Flask(__name__)
+import os
+from app.settings import *
 
+PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
 @app.route('/initialize_payment', methods=['POST'])
 def initialize_payment():
     try:
@@ -23,7 +24,7 @@ def initialize_payment():
 
         # Set headers for the request
         headers = {
-        "Authorization": "Bearer sk_test_13b0d842352136d91e09139441abed6d951ab516",  # Your Paystack secret key
+        "Authorization": f"Bearer{PAY_STACK_SECRET_KEY}",  # Your Paystack secret key
         "Content-Type": "application/json"
         }
 
@@ -53,10 +54,7 @@ def initialize_payment():
         }), response.status_code
 
     except requests.exceptions.RequestException as req_err:
-        return jsonify({'error': 'Request error: ' + str(req_err)}), 500
+        return jsonify({'error': 'Request error: ' + str(req_err)}), 500    
     except Exception as e:
         return jsonify({'error': 'An unexpected error occurred: ' + str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
